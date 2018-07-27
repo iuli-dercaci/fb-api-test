@@ -29,8 +29,9 @@ class TeamFixtures extends Fixture implements DependentFixtureInterface
     public function __construct()
     {
         $this->strips = ['red', 'yellow', 'blue', 'green', 'white', 'black'];
+
         // taken from http://www.goal.com/en-gb/news/the-top-30-funniest-fantasy-football-team-names/mxwfmgsm71bd14859aqzxx27h
-        $this->names  = [
+        $this->names = [
             'lallanas in pyjamas',
             'who ate all depays?',
             'ctrl alt de laet',
@@ -86,7 +87,6 @@ class TeamFixtures extends Fixture implements DependentFixtureInterface
     /**
      * This method must return an array of fixtures classes
      * on which the implementing class depends on
-     *
      * @return array
      */
     public function getDependencies(): array
@@ -103,7 +103,7 @@ class TeamFixtures extends Fixture implements DependentFixtureInterface
     private function getStripes(): array
     {
         $keys = array_rand($this->strips, 2);
-        
+
         return [
             $this->strips[$keys[0]],
             $this->strips[$keys[1]],
