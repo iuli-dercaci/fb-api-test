@@ -27,7 +27,7 @@ class Team
      * @ORM\Column(type="json")
      * @var string
      */
-    private $stripes;
+    private $strips;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\League", inversedBy="teams")
@@ -66,18 +66,18 @@ class Team
     /**
      * @return string
      */
-    public function getStripes()
+    public function getStrips()
     {
-        return $this->stripes;
+        return $this->strips;
     }
 
     /**
-     * @param $stripes
+     * @param $strips
      * @return Team
      */
-    public function setStripes($stripes): self
+    public function setStrips($strips): self
     {
-        $this->stripes = $stripes;
+        $this->strips = $strips;
 
         return $this;
     }

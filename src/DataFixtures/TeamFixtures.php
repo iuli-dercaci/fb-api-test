@@ -75,7 +75,7 @@ class TeamFixtures extends Fixture implements DependentFixtureInterface
 
             $team = new Team();
             $team->setName(ucwords($name))
-                ->setStripes($this->getStripes())
+                ->setStrips($this->getStrips())
                 ->setLeague($this->getLeague());
 
             $manager->persist($team);
@@ -100,7 +100,7 @@ class TeamFixtures extends Fixture implements DependentFixtureInterface
      * get random strips
      * @return array
      */
-    private function getStripes(): array
+    private function getStrips(): array
     {
         $keys = array_rand($this->strips, 2);
 
