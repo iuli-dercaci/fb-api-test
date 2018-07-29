@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TeamRepository")
@@ -18,13 +19,16 @@ class Team
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
+     * @Assert\NotBlank()
      * @var string
      */
     private $name;
 
     /**
      * @ORM\Column(type="json")
+     * @Assert\NotBlank()
+     * @Assert\Type(type="array", message="The Strips value must be an array.")
      * @var string
      */
     private $strips;
@@ -72,10 +76,10 @@ class Team
     }
 
     /**
-     * @param $strips
+     * @param array $strips
      * @return Team
      */
-    public function setStrips($strips): self
+    public function setStrips(array $strips): self
     {
         $this->strips = $strips;
 

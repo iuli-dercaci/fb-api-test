@@ -64,6 +64,10 @@ class User implements UserInterface, \Serializable
         return $this->username;
     }
 
+    /**
+     * @param string $username
+     * @return User
+     */
     public function setUsername(string $username): self
     {
         $this->username = $username;
@@ -149,7 +153,7 @@ class User implements UserInterface, \Serializable
             $this->id,
             $this->username,
             $this->password
-            ) = unserialize($serialized, array('allowed_classes' => false));
+            ) = unserialize($serialized, ['allowed_classes' => false]);
     }
 
     /**
@@ -170,7 +174,7 @@ class User implements UserInterface, \Serializable
      */
     public function getRoles()
     {
-        return ['ROLE_USER'];
+        return ['IS_AUTHENTICATED_FULLY'];
     }
 
     /**
