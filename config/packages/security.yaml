@@ -8,9 +8,8 @@ security:
             entity:
                 class: App\Entity\User
                 property: username
-        # in_memory: { memory: ~ }
+        #in_memory: { memory: ~ }
     firewalls:
-
         login:
             pattern:  ^/api/login
             stateless: true
@@ -31,10 +30,10 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
-        main:
-            pattern:    ^/
-            http_basic: ~
-            provider: db_provider
+        # main:
+            # pattern:    ^/
+            # http_basic: ~
+            # provider: db_provider
             # anonymous: true
 
             # activate different ways to authenticate
@@ -50,5 +49,3 @@ security:
     access_control:
         - { path: ^/api/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api,       roles: IS_AUTHENTICATED_FULLY }
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
