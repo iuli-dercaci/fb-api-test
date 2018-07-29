@@ -5,6 +5,8 @@ namespace App\Repository;
 use App\Entity\League;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 /**
  * @method League|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,32 +21,20 @@ class LeagueRepository extends ServiceEntityRepository
         parent::__construct($registry, League::class);
     }
 
-//    /**
-//     * @return League[] Returns an array of League objects
-//     */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @param League $league
+     * @return array
+     */
+    public function getLeagueTeamsSerialized(League $league): array
     {
-        return $this->createQueryBuilder('l')
-            ->andWhere('l.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('l.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        $serializer = new Serializer(array(new ObjectNormalizer()));
 
-    /*
-    public function findOneBySomeField($value): ?League
-    {
-        return $this->createQueryBuilder('l')
-            ->andWhere('l.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        $data = $serializer->normalize($league, null, ['attributes' => ['id','name']]);
+
+        $data['teams'] = $serializer->normalize(
+            $league->getTeams(), null, ['attributes' => ['id','name','strips']]
+        );
+
+        return $data;
     }
-    */
 }
